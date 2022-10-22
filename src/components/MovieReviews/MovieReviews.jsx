@@ -1,4 +1,4 @@
-import { fetchMovieCast } from 'fetchApi/fetchApi';
+import { fetchMovieReview } from 'fetchApi/fetchApi';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -10,7 +10,7 @@ export const MovieReviews = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const movieById = await fetchMovieCast(movieId, '/reviews');
+        const movieById = await fetchMovieReview(movieId, '/reviews');
         setMovie(movieById);
       } catch {
         setError(error);
@@ -19,6 +19,8 @@ export const MovieReviews = () => {
     };
     fetchMovies();
   }, []);
+
+  console.log(movie);
   return (
     <>
       {movie.results

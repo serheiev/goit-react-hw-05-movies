@@ -19,7 +19,7 @@ export const MovieCast = () => {
     };
     fetchMovies();
   }, []);
-
+  console.log(movie);
   return (
     <>
       {movie.cast && (

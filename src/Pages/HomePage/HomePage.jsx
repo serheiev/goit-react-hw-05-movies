@@ -20,10 +20,10 @@ export const HomePage = () => {
     };
     fetchMovies();
   }, []);
-
+  console.log(movies);
   return (
     <section>
-      <h2>Trend movies on this week for you</h2>
+      <h2>Trend movies on this day for you</h2>
       {movies.length > 0 && <MoviesList movies={movies} />}
     </section>
   );

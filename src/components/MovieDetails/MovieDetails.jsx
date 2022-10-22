@@ -13,10 +13,7 @@ export const MovieDetails = () => {
   const [error, setError] = useState(null);
   const { movieId } = useParams();
   const location = useLocation();
-  const navigation = useNavigate();
-  const goBack = () => {
-    navigation(location?.state?.from ?? '/');
-  };
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -34,7 +31,10 @@ export const MovieDetails = () => {
   return (
     <>
       <section>
-        <button type="button" onClick={goBack}>
+        <button
+          type="button"
+          onClick={() => navigate(location?.state?.from ?? '/')}
+        >
           Go back
         </button>
         <div>
