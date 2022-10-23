@@ -18,6 +18,7 @@ export const MovieReviews = () => {
       }
     };
     fetchMovies();
+    //eslint-disable-next-line
   }, []);
 
   console.log(movie);

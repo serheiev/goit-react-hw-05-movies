@@ -26,6 +26,7 @@ export const MovieDetails = () => {
       }
     };
     fetchMovies();
+    //eslint-disable-next-line
   }, []);
 
   return (

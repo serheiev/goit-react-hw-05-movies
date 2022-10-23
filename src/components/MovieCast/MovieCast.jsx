@@ -18,6 +18,7 @@ export const MovieCast = () => {
       }
     };
     fetchMovies();
+    //eslint-disable-next-line
   }, []);
   console.log(movie);
   return (

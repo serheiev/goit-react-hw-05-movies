@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { fetchTrendMovies } from 'fetchApi/fetchApi';
 import { MoviesList } from 'components/MoviesList/MoviesList';
-import { Outlet } from 'react-router-dom';
 
 export const HomePage = () => {
   const [movies, setMovies] = useState([]);
@@ -19,6 +18,7 @@ export const HomePage = () => {
       }
     };
     fetchMovies();
+    //eslint-disable-next-line
   }, []);
   console.log(movies);
   return (
