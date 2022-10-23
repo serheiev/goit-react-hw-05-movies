@@ -7,27 +7,31 @@ import {
   useNavigate,
   useParams,
 } from 'react-router-dom';
+import { Loader } from 'components/Loader/Loader';
 
 export const MovieDetails = () => {
   const [movie, setMovie] = useState([]);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const { movieId } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
+  const errMessage = 'Sorry, problemki';
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
+        setIsLoading(true);
         const movieById = await fetchMovieById(movieId);
         setMovie(movieById);
       } catch {
-        setError(error);
+        setError(errMessage);
       } finally {
+        setIsLoading(false);
       }
     };
     fetchMovies();
-    //eslint-disable-next-line
-  }, []);
+  }, [movieId]);
 
   return (
     <>
@@ -38,6 +42,8 @@ export const MovieDetails = () => {
         >
           Go back
         </button>
+        {isLoading && <Loader />}
+        {error && <p>{errMessage}</p>}
         <div>
           <img
             src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
