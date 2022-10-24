@@ -3,8 +3,9 @@ import { fetchMoviesByQuery } from 'fetchApi/fetchApi';
 import { useSearchParams } from 'react-router-dom';
 import { MoviesList } from 'components/MoviesList/MoviesList';
 import { Loader } from 'components/Loader/Loader';
+import style from './SearchPage.module.scss';
 
-export const SearchPage = () => {
+const SearchPage = () => {
   const [movies, setMovies] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [error, setError] = useState(null);
@@ -46,22 +47,26 @@ export const SearchPage = () => {
   }, [query]);
 
   return (
-    <>
-      <form onSubmit={hendleFormSubmit}>
-        <label>
+    <section className={style.section}>
+      <form className={style.form} onSubmit={hendleFormSubmit}>
+        <label className={style.label}>
           <input
+            className={style.input}
             type="text"
             placeholder="Search movies"
             value={searchQuery}
             onChange={onInput}
           />
-          <button type="submit">Search</button>
+          <button className={style.btn} type="submit">
+            Search
+          </button>
         </label>
       </form>
       {error && <p>{errMessage}</p>}
       {isLoading && <Loader />}
-      {/* <Loader /> */}
       {movies.length > 0 && <MoviesList movies={movies} />}
-    </>
+    </section>
   );
 };
+
+export default SearchPage;

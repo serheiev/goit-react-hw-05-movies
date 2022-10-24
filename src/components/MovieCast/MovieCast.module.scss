@@ -1,0 +1,19 @@
+.castList {
+  padding: 20px;
+}
+
+.castItem {
+  list-style: none;
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.castPar {
+  display: block;
+  padding: 15px;
+  font-size: 20px;
+  span {
+    font-weight: 700;
+    padding-right: 5px;
+  }
+}

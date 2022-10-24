@@ -2,8 +2,9 @@ import { Loader } from 'components/Loader/Loader';
 import { fetchMovieReview } from 'fetchApi/fetchApi';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import style from './MovieReviews.module.scss';
 
-export const MovieReviews = () => {
+const MovieReviews = () => {
   const [movie, setMovie] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -14,7 +15,7 @@ export const MovieReviews = () => {
     const fetchMovies = async () => {
       try {
         setIsLoading(true);
-        const movieById = await fetchMovieReview(movieId, '/reviews');
+        const movieById = await fetchMovieReview(movieId);
         setMovie(movieById);
       } catch {
         setError(errMessage);
@@ -25,19 +26,28 @@ export const MovieReviews = () => {
     fetchMovies();
   }, [movieId]);
 
-  console.log(movie);
   return (
     <>
       {error && <p>{errMessage}</p>}
       {isLoading && <Loader />}
-      {movie.results
-        ? movie.results.map(el => (
-            <li key={el.id}>
-              <p>Author:{el.author}</p>
-              <p>{el.content}</p>
+
+      {movie.length ? (
+        <ul className={style.reviewList}>
+          {movie.map(el => (
+            <li className={style.reviewItem} key={el.id}>
+              <p className={style.reviewPar}>
+                <span>Author:</span>
+                {el.author}
+              </p>
+              <p className={style.reviewPar}>{el.content}</p>
             </li>
-          ))
-        : 'Sorry, no reviews for this film =('}
+          ))}
+        </ul>
+      ) : (
+        <p className={style.reviewPar}>{errMessage}</p>
+      )}
     </>
   );
 };
+
+export default MovieReviews;

@@ -29,19 +29,19 @@ export const fetchMovieById = async movieId => {
   return response.data;
 };
 
-export const fetchMovieCast = async (movieId, endpoint) => {
-  const response = await axios(`movie/${movieId}${endpoint}`, {
+export const fetchMovieCast = async movieId => {
+  const response = await axios(`movie/${movieId}/credits`, {
     params: { api_key: KEY },
   });
 
-  return response.data;
+  return response.data.cast;
 };
 
-export const fetchMovieReview = async (movieId, endpoint) => {
-  const response = await axios(`movie/${movieId}${endpoint}`, {
+export const fetchMovieReview = async movieId => {
+  const response = await axios(`movie/${movieId}/reviews`, {
     params: { api_key: KEY },
   });
 
-  return response.data;
+  return response.data.results;
 };
 // apiKey = c220bc7b4cb21e29de30191d135b55c8

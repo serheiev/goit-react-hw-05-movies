@@ -8,8 +8,9 @@ import {
   useParams,
 } from 'react-router-dom';
 import { Loader } from 'components/Loader/Loader';
+import style from './MovieDetails.module.scss';
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
   const [movie, setMovie] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -35,8 +36,9 @@ export const MovieDetails = () => {
 
   return (
     <>
-      <section>
+      <section className={style.section}>
         <button
+          className={style.btn}
           type="button"
           onClick={() => navigate(location?.state?.from ?? '/')}
         >
@@ -44,21 +46,31 @@ export const MovieDetails = () => {
         </button>
         {isLoading && <Loader />}
         {error && <p>{errMessage}</p>}
-        <div>
-          <img
-            src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-            alt=""
-            width="260"
-          />
-          <div>
-            <h3>{movie.title}</h3>
+
+        <div className={style.wrapper}>
+          {movie.poster_path ? (
+            <img
+              src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+              alt=""
+              width="260"
+            />
+          ) : (
+            <img
+              src={`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRYvi7RcqkGOZrnsNfQAJKwmQjJArBXLT6d6owgfKB&s`}
+              alt=""
+              width="260"
+            />
+          )}
+
+          <div className={style.descWrapper}>
+            <h3 className={style.descTitle}>{movie.title}</h3>
             <span>User score</span>
-            <h4>Owerview</h4>
-            <p>{movie.overview}</p>
-            <h5>Genres</h5>
+            <h4 className={style.descOwer}>Owerview</h4>
+            <p className={style.descPar}>{movie.overview}</p>
+            <h5 className={style.descGenres}>Genres</h5>
 
             {movie.genres && (
-              <p>
+              <p className={style.descPar}>
                 {movie.genres.map(el => (
                   <span key={el.name}>{el.name}</span>
                 ))}
@@ -66,10 +78,10 @@ export const MovieDetails = () => {
             )}
           </div>
         </div>
-        <Link to="cast" state={location.state} type="button">
+        <Link className={style.link} to="cast" state={location.state}>
           Cast
         </Link>
-        <Link to="reviews" state={location.state} type="button">
+        <Link className={style.link} to="reviews" state={location.state}>
           Reviews
         </Link>
       </section>
@@ -77,3 +89,5 @@ export const MovieDetails = () => {
     </>
   );
 };
+
+export default MovieDetails;

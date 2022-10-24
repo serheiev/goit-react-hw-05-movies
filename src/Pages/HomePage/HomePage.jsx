@@ -3,8 +3,9 @@ import { useState } from 'react';
 import { fetchTrendMovies } from 'fetchApi/fetchApi';
 import { MoviesList } from 'components/MoviesList/MoviesList';
 import { Loader } from 'components/Loader/Loader';
+import style from './HomePage.module.scss';
 
-export const HomePage = () => {
+const HomePage = () => {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -26,11 +27,13 @@ export const HomePage = () => {
   }, []);
 
   return (
-    <section>
-      <h2>Trend movies on this day for you</h2>
-      {error && <p>{errMessage}</p>}
+    <section className={style.section}>
+      <h2 className={style.title}>Trend movies on this day for you</h2>
+      {error && <p className={style.par}>{errMessage}</p>}
       {isLoading && <Loader />}
       {movies.length > 0 && <MoviesList movies={movies} />}
     </section>
   );
 };
+
+export default HomePage;
