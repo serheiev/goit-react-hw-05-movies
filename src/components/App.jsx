@@ -16,17 +16,20 @@ const LazyMovieReviews = lazy(() => import('./MovieReviews/MovieReviews'));
 
 export const App = () => {
   return (
-    <Suspense fallback={<Loader />}>
-      {/* <Route path="/" element={<LazyHeader />}></Route> */}
+    <>
       <Header />
-      <Routes>
-        <Route index element={<LazyHomePage />} />
-        <Route path="/movies" element={<LazySearchPage />} />
-        <Route path="/movies/:movieId" element={<LazyMovieDetails />}>
-          <Route path="cast" element={<LazyMovieCast />} />
-          <Route path="reviews" element={<LazyMovieReviews />} />
-        </Route>
-      </Routes>
-    </Suspense>
+      <Suspense fallback={<Loader />}>
+        {/* <Route path="/" element={<LazyHeader />}></Route> */}
+
+        <Routes>
+          <Route index element={<LazyHomePage />} />
+          <Route path="/movies" element={<LazySearchPage />} />
+          <Route path="/movies/:movieId" element={<LazyMovieDetails />}>
+            <Route path="cast" element={<LazyMovieCast />} />
+            <Route path="reviews" element={<LazyMovieReviews />} />
+          </Route>
+        </Routes>
+      </Suspense>
+    </>
   );
 };
